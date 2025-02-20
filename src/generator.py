@@ -48,56 +48,58 @@ for hour in range(24):
     if not os.path.exists(image_path):
         images_to_generate.append(hour)
 
-# Regenerate images if needed
-if images_to_generate:
-    print("Regenerating missing images...")
+# Generate the gradient with the monochrome fade
+for hour in images_to_generate:
+    colour = interpolate_colour(hour)
+    
+    # Calculate a monochrome shade (e.g., the average RGB value)
+    average_colour = np.mean(colour)  # A simple average to get a monochrome shade
+    monochrome_colour = (int(average_colour), int(average_colour), int(average_colour))
+    
+    # Fade ratio
+    fade_ratio = 0.3
+    gradient_height = int(height * fade_ratio)
+    
+    # Create gradient fading to the monochrome shade
+    gradient = np.vstack([
+        np.full((height - gradient_height, width, 3), colour, dtype=np.uint8),
+        np.linspace(colour, monochrome_colour, gradient_height).astype(np.uint8).reshape(gradient_height, 1, 3).repeat(width, axis=1)
+    ])
+    
+    # Debugging: Check gradient shape and sample pixel value
+    print(f"Hour {hour}: Gradient shape - {gradient.shape}")
+    print(f"Hour {hour}: Sample pixel value at (0, 0) - {gradient[0, 0]}")
 
-    # Generate images
-    for hour in images_to_generate:
-        colour = interpolate_colour(hour)
-        fade_ratio = 0.3  # Make the gradient fade lower
-        gradient_height = int(height * fade_ratio)
-        gradient = np.vstack([
-            np.full((height - gradient_height, width, 3), colour, dtype=np.uint8),
-            np.linspace(colour, (255, 255, 255), gradient_height).astype(np.uint8).reshape(gradient_height, 1, 3).repeat(width, axis=1)
-        ])
-        
-        # Debugging: Check gradient shape and sample pixel value
-        print(f"Hour {hour}: Gradient shape - {gradient.shape}")
-        print(f"Hour {hour}: Sample pixel value at (0, 0) - {gradient[0, 0]}")
+    # Create the image
+    img = Image.fromarray(gradient)
 
-        # Directly create the image from the gradient array
-        img = Image.fromarray(gradient)
+    # Debugging: Check image mode and size
+    print(f"Hour {hour}: Image mode - {img.mode}")
+    print(f"Hour {hour}: Image size - {img.size}")
 
-        # Debugging: Check image mode and size
-        print(f"Hour {hour}: Image mode - {img.mode}")
-        print(f"Hour {hour}: Image size - {img.size}")
+    # Add text
+    draw = ImageDraw.Draw(img)
+    try:
+        font = ImageFont.truetype(font_path, font_size)
+    except IOError:
+        font = ImageFont.load_default()
 
-        # Add text
-        draw = ImageDraw.Draw(img)
-        try:
-            font = ImageFont.truetype(font_path, font_size)
-        except IOError:
-            font = ImageFont.load_default()
+    # Calculate text width and height using textbbox
+    bbox = draw.textbbox((0, 0), name, font=font)
+    text_width = bbox[2] - bbox[0]
+    text_height = bbox[3] - bbox[1]
 
-        # Calculate text width and height using textbbox
-        bbox = draw.textbbox((0, 0), name, font=font)
-        text_width = bbox[2] - bbox[0]
-        text_height = bbox[3] - bbox[1]
+    position = (20, 20)  # Top-left corner
+    text_colour = (255 - int(colour[0]), 255 - int(colour[1]), 255 - int(colour[2]))  # Contrasting colour
+    draw.text(position, name, fill=text_colour, font=font)
 
-        position = (20, 20)  # Top-left corner
-        text_colour = (255 - int(colour[0]), 255 - int(colour[1]), 255 - int(colour[2]))  # Contrasting colour
-        draw.text(position, name, fill=text_colour, font=font)
-
-        # Save image to disk
-        image_path = f"{output_folder}/{str(hour).zfill(2)}.png"
-        try:
-            img.save(image_path)
-            print(f"Hour {hour}: Image saved successfully.")
-        except Exception as e:
-            print(f"Error saving image for hour {hour}: {e}")
-
-    print("Missing images regenerated.")
+    # Save image to disk
+    image_path = f"{output_folder}/{str(hour).zfill(2)}.png"
+    try:
+        img.save(image_path)
+        print(f"Hour {hour}: Image saved successfully.")
+    except Exception as e:
+        print(f"Error saving image for hour {hour}: {e}")
 
 else:
     print("All images already exist. No regeneration needed.")
