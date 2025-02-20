@@ -61,7 +61,6 @@ The script reads configuration settings from a JSON file located at `./config/ge
 
 - `sky_colours`: A dictionary mapping hours (as strings) to RGB values representing the sky colour at that hour.
 - `name`: The name to be displayed on each image.
-- `timezone`: The timezone for the project.
 
 ## Usage
 
