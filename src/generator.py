@@ -2,14 +2,12 @@ import json
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import os
-import sys
 
 # Load sky colours, name, and timezone from generation.json
 with open("./config/generation.json", "r") as file:
     config = json.load(file)
     sky_colours = config["sky_colours"]
     name = config["name"]
-    timezone = config["timezone"]
 
 # Function to interpolate RGB values between given key times
 def interpolate_colour(hour):
