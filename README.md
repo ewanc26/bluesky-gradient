@@ -1,5 +1,7 @@
 # Sky Colour Gradient Image Generator
 
+***This repository is available on [GitHub](https://github.com/ewanc26/bluesky-gradient) and [Tangled](https://tangled.sh/@ewancroft.uk/bluesky-gradient). GitHub is the primary version, and the Tangled version is a mirror.***
+
 This Python script generates a series of 24 images representing sky colour gradients for each hour of the day. Each image features a gradient transitioning from a specified sky colour to a monochrome shade, with a name overlaid in a contrasting colour. This project was inspired by [@dame.is](https://bsky.app/profile/dame.is)'s blog post ['How I made an automated dynamic avatar for my Bluesky profile'](https://dame.is/blog/how-i-made-an-automated-dynamic-avatar-for-my-bluesky-profile).
 
 While primarily designed for generating banner images, the script also supports creating profile images and custom-sized images.
