@@ -95,3 +95,7 @@ The script reads configuration settings from a JSON file located at `./config/ge
 ## License
 
 This project is licensed under the MIT License.
+
+## ☕ Support
+
+If you found this useful, consider [buying me a ko-fi](https://ko-fi.com/ewancroft)!
