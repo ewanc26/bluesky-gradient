@@ -1,5 +1,5 @@
 {
-  description = "bluesky-gradient — sky colour gradient image generator";
+  description = "bluesky-gradient — Gradient image generator for Bluesky (Rust)";
 
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
@@ -13,15 +13,16 @@
         {
           default = pkgs.mkShell {
             packages = with pkgs; [
-              python3
-              python3Packages.pip
-              python3Packages.virtualenv
-              python3Packages.pillow
-              python3Packages.numpy
+              rustc
+              cargo
+              rust-analyzer
+              pkg-config
+              openssl
+              fontconfig
             ];
 
             shellHook = ''
-              echo "bluesky-gradient dev shell ready (Python 3 + Pillow + NumPy)"
+              echo "bluesky-gradient dev shell ready (Rust)"
             '';
           };
         }
