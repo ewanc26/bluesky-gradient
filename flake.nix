@@ -1,6 +1,8 @@
 {
   description = "bluesky-gradient — Gradient image generator for Bluesky (Rust)";
 
+  # Pin to nixos-25.11 for a stable toolchain; the crate has no platform-
+  # specific dependencies so any channel works.
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
   outputs = { self, nixpkgs }:
@@ -12,6 +14,9 @@
         let pkgs = nixpkgs.legacyPackages.${system}; in
         {
           default = pkgs.mkShell {
+            # Core Rust toolchain plus libfontconfig for ab_glyph rasterisation.
+            # openssl is included for cargo-native dependencies (not used directly
+            # by this crate but commonly needed).
             packages = with pkgs; [
               rustc
               cargo

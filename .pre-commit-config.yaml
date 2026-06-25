@@ -1,3 +1,6 @@
+# Automatically format non-Rust files with Prettier on commit.
+# The crate itself is Rust, but the repo contains JSON config and Markdown
+# docs that benefit from consistent formatting.
 repos:
   - repo: local
     hooks:

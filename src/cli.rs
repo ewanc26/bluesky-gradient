@@ -1,5 +1,6 @@
 use clap::Parser;
 
+/// CLI arguments for the bluesky-gradient image generator.
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
 pub struct Args {
@@ -24,6 +25,7 @@ pub struct Args {
     pub custom_height: Option<u32>,
 }
 
+/// Resolved dimensions and output path for the current run.
 pub struct ImageParams {
     pub width: u32,
     pub height: u32,
@@ -31,6 +33,10 @@ pub struct ImageParams {
 }
 
 impl Args {
+    /// Translate the user-facing flag into concrete image dimensions.
+    ///
+    /// Exactly one of --profile, --banner, or --custom must be set; --custom
+    /// additionally requires --width and --height.
     pub fn image_params(&self) -> anyhow::Result<ImageParams> {
         if self.profile {
             Ok(ImageParams { width: 400, height: 400, output_folder_base: "src/profile_pics".into() })
