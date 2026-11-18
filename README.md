@@ -1,5 +1,7 @@
 # Bluesky Gradient Image Generator
 
+[![Licence](https://img.shields.io/github/license/ewanc26/bluesky-gradient?label=licence)](LICENSE)
+[![Sponsor](https://img.shields.io/github/sponsors/ewanc26?logo=githubsponsors&logoColor=white&label=sponsors)](https://github.com/sponsors/ewanc26)
 [![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 Generates gradient profile pictures and banners for Bluesky, one per hour.
@@ -45,6 +47,10 @@ Images are saved to `src/profile_pics` or `src/banners`.
 - `src/main.rs` — Generation logic
 - `config/generation.json` — Colour and name config
 - `config/fonts/` — Font file directory
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for the workflow and the checks required before opening a pull request.
 
 ## Licence
 

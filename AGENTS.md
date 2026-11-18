@@ -4,9 +4,7 @@ Guidance for AI coding agents working in **bluesky-gradient**.
 
 ## Project overview
 
-
-
-- Language: Rust
+- Language: TypeScript
 - Default branch: main
 
 ## Working rules
