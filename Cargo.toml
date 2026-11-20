@@ -6,7 +6,7 @@ edition = "2021"
 [dependencies]
 clap = { version = "4.5.4", features = ["derive"] }
 image = "0.25.1"
-imageproc = "0.25.0"
+imageproc = "0.27.0"
 ab_glyph = "0.2.23"
 palette = { version = "0.7.6", features = ["std"] }
 serde = { version = "1.0.201", features = ["derive"] }
