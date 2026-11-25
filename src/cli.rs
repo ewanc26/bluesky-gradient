@@ -1,3 +1,4 @@
+use anyhow::Context;
 use clap::Parser;
 
 /// CLI arguments for the bluesky-gradient image generator.
