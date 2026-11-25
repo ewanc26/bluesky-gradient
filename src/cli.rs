@@ -22,7 +22,7 @@ pub struct Args {
     pub width: Option<u32>,
 
     /// Custom image height (required with -c)
-    #[arg(short, long, name = "HEIGHT")]
+    #[arg(long = "height", value_name = "HEIGHT")]
     pub custom_height: Option<u32>,
 }
 
